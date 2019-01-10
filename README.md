@@ -4,7 +4,7 @@ django-cricket-playcricket-link 🏏
 
 Django-Cricket-PlayCricket-Link is an extension to [Django-Cricket](https://github.com/RileyEv/django-cricket/). It links the storage app with the ECB Play Cricket System.
 
-📝 Note: Development is still in progress and not in a stable state. I doubt it'll (know it wont) work yet! 🤪
+📝 _Note_: Development is still in progress and not in a stable state. I doubt it'll (know it wont) work yet! 🤪
 
 Detailed documentation is in the "docs" directory. (Not produced yet. So instead heres a unicorn... 🦄)
 
