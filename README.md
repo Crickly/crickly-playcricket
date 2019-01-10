@@ -16,10 +16,12 @@ To use this app you will need an API Token provided by the [Play Cricket Helpdes
 
 1. Add `cricket` and `cricket.playcricket` to your INSTALLED_APPS setting like this
 
+```
     INSTALLED_APPS = [
         ...
-        'cricket'
+        'cricket',
         'cricket.playcricket',
     ]
+```
 
 2. Run `python manage.py migrate` to create the cricket models.
