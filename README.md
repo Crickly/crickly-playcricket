@@ -1,1 +1,0 @@
-# django-cricket-playcricket-link
