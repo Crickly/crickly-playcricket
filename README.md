@@ -19,7 +19,7 @@ To use this app you will need an API Token provided by the [Play Cricket Helpdes
 ```
     INSTALLED_APPS = [
         ...
-        'cricket',
+        'cricket.core',
         'cricket.playcricket',
     ]
 ```
