@@ -14,7 +14,7 @@ Quick start 🛫
 To use this app you will need an API Token provided by the [Play Cricket Helpdesk](https://play-cricket.ecb.co.uk/hc/en-us/requests/new?ticket_form_id=217809).
 
 
-1. Add `cricket` and `cricket.playcricket` to your INSTALLED_APPS setting like this
+1. Add `cricket.core` and `cricket.playcricket` to your INSTALLED_APPS setting like this
 
 ```
     INSTALLED_APPS = [
