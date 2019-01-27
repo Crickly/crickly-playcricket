@@ -11,47 +11,61 @@ class PlayCricketLinker(models.Model):
     class Meta:
         abstract = True
 
+    @classmethod
+    def cricket_model(self):
+        return self.model_link
+
 
 class Match(PlayCricketLinker):
-    match = models.ForeignKey(coremodels.Match, on_delete=models.CASCADE,
+    model_link = coremodels.Match
+    link = models.ForeignKey(coremodels.Match, on_delete=models.CASCADE,
                               related_name='pc_match_link')
 
 
+
 class Team(PlayCricketLinker):
-    team = models.ForeignKey(coremodels.Team, on_delete=models.CASCADE, related_name='pc_team_link')
+    model_link = coremodels.Team
+    link = models.ForeignKey(coremodels.Team, on_delete=models.CASCADE, related_name='pc_team_link')
 
 
 class Club(PlayCricketLinker):
-    club = models.ForeignKey(coremodels.Club, on_delete=models.CASCADE, related_name='pc_club_link')
+    model_link = coremodels.Club
+    link = models.ForeignKey(coremodels.Club, on_delete=models.CASCADE, related_name='pc_club_link')
 
 
 class Umpire(PlayCricketLinker):
-    umpire = models.ForeignKey(coremodels.Umpire, on_delete=models.CASCADE,
+    model_link = coremodels.Umpire
+    link = models.ForeignKey(coremodels.Umpire, on_delete=models.CASCADE,
                                related_name='pc_umpire_link')
 
 
 class Scorer(PlayCricketLinker):
-    scorer = models.ForeignKey(coremodels.Scorer, on_delete=models.CASCADE,
+    model_link = coremodels.Scorer
+    link = models.ForeignKey(coremodels.Scorer, on_delete=models.CASCADE,
                                related_name='pc_scorer_link')
 
 
 class Competition(PlayCricketLinker):
-    competition = models.ForeignKey(coremodels.Competition, on_delete=models.CASCADE,
+    model_link = coremodels.Competition
+    link = models.ForeignKey(coremodels.Competition, on_delete=models.CASCADE,
                                     related_name='pc_competition_link')
 
 
 class League(PlayCricketLinker):
-    league = models.ForeignKey(coremodels.Competition, on_delete=models.CASCADE,
+    model_link = coremodels.League
+    link = models.ForeignKey(coremodels.League, on_delete=models.CASCADE,
                                related_name='pc_league_link')
 
 
 class Ground(PlayCricketLinker):
-    ground = models.ForeignKey(coremodels.Ground, on_delete=models.CASCADE,
+    model_link = coremodels.Ground
+    link = models.ForeignKey(coremodels.Ground, on_delete=models.CASCADE,
                                related_name='pc_ground_link')
 
 
 class Player(PlayCricketLinker):
-    player = models.ForeignKey(coremodels.Player, on_delete=models.CASCADE,
+    model_link = coremodels.Player
+    link = models.ForeignKey(coremodels.Player, on_delete=models.CASCADE,
                                related_name='pc_player_link')
 
 
