@@ -578,7 +578,7 @@ class Command(BaseCommand):
                                     bp.bowl_inning_no = inning_no
                         except KeyError:
                             match.processing_issue = True
-                            self.stdout.write('Issue processing match {}'.format(match.match_id))
+                            self.stdout.write('Issue processing match {}'.format(pc_match.pc_id))
                         else:
                             # save all the performances
                             for k, v in player_performances.iteritems():
