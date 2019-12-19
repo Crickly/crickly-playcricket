@@ -9,7 +9,7 @@ from django.conf import settings
 from cricket.models import Performance
 
 # Python imports
-from Queue import Queue
+from queue import Queue
 from threading import Thread
 
 
