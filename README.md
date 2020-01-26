@@ -13,8 +13,9 @@ Quick start 🛫
 -------------
 To use this app you will need an API Token provided by the [Play Cricket Helpdesk](https://play-cricket.ecb.co.uk/hc/en-us/requests/new?ticket_form_id=217809).
 
+1. Install `pip install crickly`
 
-1. Add `cricket.core` and `cricket.playcricket` to your INSTALLED_APPS setting like this
+2. Add `cricket.core` and `cricket.playcricket` to your INSTALLED_APPS setting like this
 
 ```
     INSTALLED_APPS = [
@@ -24,4 +25,4 @@ To use this app you will need an API Token provided by the [Play Cricket Helpdes
     ]
 ```
 
-2. Run `python manage.py migrate` to create the cricket models.
+3. Run `python manage.py migrate` to create the cricket models.
