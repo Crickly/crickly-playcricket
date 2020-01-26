@@ -17,6 +17,7 @@ setup(
     license='MIT License',  # example license
     description='An extension for crickly to link with the ECB Play Cricket system',
     long_description=README,
+    long_description_content_type='text/markdown',
     url='https://rly.rocks/s/crickly',
     author='Riley Evans',
     author_email='crickly@rileyevans.co.uk',
