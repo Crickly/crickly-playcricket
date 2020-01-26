@@ -2,7 +2,7 @@
 Crickly-playcricket 🏏
 ==================================
 
-Django-Cricket-PlayCricket-Link is an extension to [Crickly](https://github.com/Crickly/crickly/). It links the core app with the ECB Play Cricket System.
+Crickly-PlayCricket is an extension to [Crickly](https://github.com/Crickly/crickly/). It links the core app with the ECB Play Cricket System.
 
 📝 _Note_: Development is still in progress and not in a stable state. I doubt it'll (know it wont) work yet! 🤪
 

@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 from django.core.management.base import BaseCommand
 from django.conf import settings
-from cricket.core import models as coremodels
-from cricket.playcricketlink import models as pcmodels
+from crickly.core import models as coremodels
+from crickly.playcricket import models as pcmodels
 from queue import Queue
 from threading import Thread
 from datetime import date, timedelta

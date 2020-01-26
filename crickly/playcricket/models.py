@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-from cricket.core import models as coremodels
+from crickly.core import models as coremodels
 
 class PlayCricketLinker(models.Model):
     pc_id = models.CharField(max_length=20)

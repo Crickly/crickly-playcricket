@@ -13,8 +13,8 @@ import requests
 import json
 
 # App Imports
-from cricket.core import models as coremodels
-from cricket.playcricketlink import models as pcmodels
+from crickly.core import models as coremodels
+from crickly.playcricket import models as pcmodels
 
 
 class Command(BaseCommand):

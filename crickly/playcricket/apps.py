@@ -4,5 +4,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class PlaycricketlinkConfig(AppConfig):
-    name = 'playcricketlink'
+class PlaycricketConfig(AppConfig):
+    name = 'playcricket'

@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from cricket.playcricketlink import models
+from crickly.playcricket import models
 
 admin.site.register(models.Club)
 admin.site.register(models.Competition)
