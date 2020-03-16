@@ -93,6 +93,7 @@ class Command(BaseCommand):
                         ) or self.is_innings_basic_data(match_data['innings'][1])
                     except IndexError:
                         basic_info = True
+                    print(basic_info)
                     if basic_info and not match.is_live_score():
                         # upload basic info
                         inning_no = coremodels.Inning.objects.filter(match__id=match.id).count()
@@ -134,9 +135,13 @@ class Command(BaseCommand):
                         self.no_basic_uploads += 1
                         if match.date.get_date() < date.today() - timedelta(days=14):
                             match.processing_issue = True
+                            match.save()
                     else:
                         # full results upload
                         # check if two basic innings exist
+                        if match.is_live_score() and \
+                                match.date.get_date() < date.today() - timedelta(days=14):
+                            match.processing_issue = True
                         saved_innings = coremodels.Inning.objects.filter(match__id=match.id)
                         if saved_innings.count() == 2:
                             # two innings exist so add to innings
@@ -272,7 +277,7 @@ class Command(BaseCommand):
                                     'runs': i['runs'] if i['runs'] != '' else 0,
                                     'wickets': i['wickets'] if i['wickets'] != '' else 0,
                                     'overs': i['overs'] if i['overs'] != '' else 0,
-                                    'declared': i['declared'],
+                                    'declared': i['declared'] if i['declared'] is not None else False,
                                     'extras_byes': i['extra_byes'] if i['extra_byes'] != '' else 0,
                                     'extras_leg_byes': i['extra_leg_byes'] if i['extra_leg_byes'] != '' else 0,
                                     'extras_wides': i['extra_wides'] if i['extra_wides'] != '' else 0,
@@ -313,7 +318,7 @@ class Command(BaseCommand):
                         unsure_field_performances.delete()
 
                         for team in match_data['players']:
-                            for k, team in team.iteritems():
+                            for k, team in team.items():
                                 for eachplayer in team:
                                     # check if player already exists
                                     club = pcmodels.Club.objects.filter(
@@ -581,16 +586,16 @@ class Command(BaseCommand):
                             self.stdout.write('Issue processing match {}'.format(pc_match.pc_id))
                         else:
                             # save all the performances
-                            for k, v in player_performances.iteritems():
+                            for k, v in player_performances.items():
                                 self.no_performance_uploads += 1
                                 v.save()
-                            for k, v in bat_performances.iteritems():
+                            for k, v in bat_performances.items():
                                 self.no_performance_uploads += 1
                                 v.save()
-                            for k, v in bowl_performances.iteritems():
+                            for k, v in bowl_performances.items():
                                 self.no_performance_uploads += 1
                                 v.save()
-                            for k, v in field_performances.iteritems():
+                            for k, v in field_performances.items():
                                 self.no_performance_uploads += 1
                                 v.save()
                             # Save match
@@ -598,7 +603,7 @@ class Command(BaseCommand):
                                 match.full_scorecard = True
                             match.save()
                             self.no_full_uploads += 1
-                        match.save()
+                    match.save()
                 else:
                     self.no_not_uploaded += 1
                     # Check if match was played or not
@@ -621,7 +626,7 @@ class Command(BaseCommand):
                 self.no_not_uploaded += 1
                 self.stdout.write('Issue fetching match {}'.format(
                     pc_match.pc_id))
-        except IOError:
+        except:
             try:
                 self.stdout.write('Error processing match {}'.format(pc_match.pc_id))
                 match.processing_issue = True
@@ -649,10 +654,13 @@ class Command(BaseCommand):
         )).distinct():
             # will loop every match that does not have a full scorecard
             if match.link.date.get_date() <= date.today():
-                if match.link.home_team.club.home_club:
-                    self.process([match])
-                else:
-                    self.process([match])
+                # If possible for match to start
+                print(match.id)
+                self.process([match])
+                # if match.link.home_team.club.home_club:
+                #     self.process([match])
+                # else:
+                #     self.process([match])
                 # self.queue.put([match.id, match.fk_team.id])
         # self.createWorkers()
         # self.queue.join()

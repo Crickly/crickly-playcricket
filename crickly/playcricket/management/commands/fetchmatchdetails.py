@@ -321,7 +321,7 @@ class Command(BaseCommand):
             else:
                 # Match fetched was not match requested
                 self.stdout.write('Issue fetching match: {}'.format(match_id))
-        except ZeroDivisionError:
+        except:
             self.stdout.write('Error processing match: {}'.format(match_id))
 
     def createWorkers(self):
@@ -334,33 +334,34 @@ class Command(BaseCommand):
         clubs = pcmodels.Club.objects.filter(link__home_club=True)
         for club in clubs:
             club_id = club.pc_id
-            teams = pcmodels.Team.objects.filter(link__club_id=club.link.id)
+            # teams = pcmodels.Team.objects.filter(link__club_id=club.link.id)
             # teams = PlayCricketTeam.objects.filter(active=True)
-            for team in teams:  # For each team defined in settings
-                self.stdout.write('Next team {}'.format(team.link.name))
-                season_range = [datetime.now().year]
+            # for team in teams:  # For each team defined in settings
+                # self.stdout.write('Next team {}'.format(team.link.name))
+                # season_range = [datetime.now().year]
                 # Remove comment below on first run!!
-                season_range = range(
-                    int(2017),
-                    int(datetime.now().year) + 1,
-                    1
-                )
-                for i in season_range:  # for each season till current one
-                    self.stdout.write('next season {}'.format(i))
-                    matches = self.get_data(
-                        'matches.json?&site_id={}&season={}&team_id={}'.format(club_id, i, team.pc_id)
-                    )['matches']  # fetches matches for team and season
-                    for match in matches:
-                        # for each match in data requested
-                        # Checks match status is new and published, and not currently in database
-                        if match['status'] == 'New' and match['published'] == 'Yes':
-                            # self.queue.put({
-                            #     'match_id': match['id'],
-                            #     'team': team
-                            # })  # Adds match id to queue
-                            self.process({
-                                'match_id': match['id'],
-                                'team': team,
-                            })
-                            self.stdout.write('Added {} to queue'.format(match['id']))
+            season_range = range(
+                int(2017),
+                int(datetime.now().year) + 1,
+                1
+            )
+            for i in season_range:  # for each season till current one
+                self.stdout.write('next season {}'.format(i))
+                matches = self.get_data(
+                    # 'matches.json?&site_id={}&season={}&team_id={}'.format(club_id, i, team.pc_id)
+                    'matches.json?&site_id={}&season={}'.format(club_id, i)
+                )['matches']  # fetches matches for team and season
+                for match in matches:
+                    # for each match in data requested
+                    # Checks match status is new and published, and not currently in database
+                    if match['status'] == 'New' and match['published'] == 'Yes':
+                        # self.queue.put({
+                        #     'match_id': match['id'],
+                        #     'team': team
+                        # })  # Adds match id to queue
+                        self.process({
+                            'match_id': match['id'],
+                            # 'team': team,
+                        })
+                        self.stdout.write('Added {} to queue'.format(match['id']))
         self.stdout.write('Matches have been saved')
